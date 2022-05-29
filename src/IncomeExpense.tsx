@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-type IncomeExpenseProps = { income: number; outcome: number };
+type IncomeExpenseProps = { income: number; charge: number };
 
-const IncomeExpense = ({ income, outcome }: IncomeExpenseProps) => {
-  console.log("outcome", outcome);
+const IncomeExpense = ({ income, charge }: IncomeExpenseProps) => {
+  console.log("charge", charge);
 
-  const outcomeFormatted = outcome.toFixed(2).slice(1);
-  // const outcomeFormatted = Math.abs(outcome).toFixed(2);
+  const chargeFormatted = charge.toFixed(2).slice(1);
+  // const chargeFormatted = Math.abs(charge).toFixed(2);
 
   return (
     <div
@@ -41,7 +41,7 @@ const IncomeExpense = ({ income, outcome }: IncomeExpenseProps) => {
         }}
       >
         <h4 style={{ marginBottom: "5px" }}>EXPENSE</h4>
-        <h2 style={{ marginTop: "0px", color: "red" }}>$ {outcomeFormatted}</h2>
+        <h2 style={{ marginTop: "0px", color: "red" }}>$ {chargeFormatted}</h2>
       </div>
     </div>
   );

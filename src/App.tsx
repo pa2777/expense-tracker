@@ -15,7 +15,7 @@ const expenses = [
 
 const App = () => {
   const [expenseList, setExpenseList] = useState<expense[]>(expenses);
-  const [total, setTotal] = useState({ income: 0, outcome: 0 });
+  const [total, setTotal] = useState({ income: 0, charge: 0 });
 
   useEffect(() => {
     counter(expenseList);
@@ -23,12 +23,12 @@ const App = () => {
 
   const counter = (expenses: expense[]) => {
     let income = 0;
-    let outcome = 0;
+    let charge = 0;
     expenses.forEach(({ text, value }) => {
-      value > 0 ? (income += value) : (outcome += value);
+      value > 0 ? (income += value) : (charge += value);
     });
 
-    setTotal({ income, outcome });
+    setTotal({ income, charge });
   };
 
   const handleClick = (newTransaction: expense) => {
@@ -48,9 +48,9 @@ const App = () => {
           Expense Tracker
         </h1>
       </div>
-      <BalanceDisplay value={total.income + total.outcome} />
+      <BalanceDisplay value={total.income + total.charge} />
       <div>
-        <IncomeExpense income={total.income} outcome={total.outcome} />
+        <IncomeExpense income={total.income} charge={total.charge} />
       </div>
       <div>
         <History records={expenseList} />
