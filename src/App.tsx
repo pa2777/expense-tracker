@@ -17,6 +17,8 @@ const App = () => {
   const [expenseList, setExpenseList] = useState<expense[]>(expenses);
   const [total, setTotal] = useState({ income: 0, charge: 0 });
 
+  // localStorage.setItem("expenses", JSON.stringify(expenseList));
+
   useEffect(() => {
     counter(expenseList);
   }, [expenseList.length]);
@@ -33,6 +35,10 @@ const App = () => {
 
   const handleClick = (newTransaction: expense) => {
     setExpenseList([...expenseList, newTransaction]);
+  };
+
+  const handleDelete = (text: string) => {
+    setExpenseList(expenseList.filter((expense) => expense.text != text));
   };
 
   return (
@@ -53,7 +59,7 @@ const App = () => {
         <IncomeExpense income={total.income} charge={total.charge} />
       </div>
       <div>
-        <History records={expenseList} />
+        <History records={expenseList} handleDelete={handleDelete} />
       </div>
       <div>
         <NewTransaction handleClick={handleClick} />
