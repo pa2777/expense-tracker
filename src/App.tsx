@@ -1,23 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import BalanceDisplay from "./BalanceDisplay";
 import IncomeExpense from "./IncomeExpense";
 import History from "./History";
 import NewTransaction from "./NewTransaction";
-import { tab } from "@testing-library/user-event/dist/tab";
-import { expense, recordsProps } from "./types";
+import {tab} from "@testing-library/user-event/dist/tab";
+import {expense, recordsProps} from "./types";
 
 const expenses = [
-  { text: "Cash", value: 500 },
-  { text: "Book", value: -40 },
-  { text: "Camera", value: -200 },
+  {text: "Cash", value: 500},
+  {text: "Book", value: -40},
+  {text: "Camera", value: -200},
 ];
 
-const App = () => {
-  const [expenseList, setExpenseList] = useState<expense[]>(expenses);
-  const [total, setTotal] = useState({ income: 0, charge: 0 });
+localStorage.setItem("expenses", JSON.stringify(expenses));
 
-  // localStorage.setItem("expenses", JSON.stringify(expenseList));
+const App = () => {
+  const [expenseList, setExpenseList] = useState<expense[]>(
+    JSON.parse(localStorage.getItem("expenses")!) || []
+  );
+  const [total, setTotal] = useState({income: 0, charge: 0});
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(expenseList));
+  }, [expenseList]);
 
   useEffect(() => {
     counter(expenseList);
@@ -26,11 +31,11 @@ const App = () => {
   const counter = (expenses: expense[]) => {
     let income = 0;
     let charge = 0;
-    expenses.forEach(({ text, value }) => {
+    expenses.forEach(({text, value}) => {
       value > 0 ? (income += value) : (charge += value);
     });
 
-    setTotal({ income, charge });
+    setTotal({income, charge});
   };
 
   const handleClick = (newTransaction: expense) => {
@@ -42,7 +47,7 @@ const App = () => {
   };
 
   return (
-    <div style={{ margin: 150 }}>
+    <div style={{margin: 150}}>
       <div>
         <h1
           style={{

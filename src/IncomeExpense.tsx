@@ -1,11 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-type IncomeExpenseProps = { income: number; charge: number };
+type IncomeExpenseProps = {income: number; charge: number};
 
-const IncomeExpense = ({ income, charge }: IncomeExpenseProps) => {
-  console.log("charge", charge);
-
+const IncomeExpense = ({income, charge}: IncomeExpenseProps) => {
   const chargeFormatted = charge.toFixed(2).slice(1);
   // const chargeFormatted = Math.abs(charge).toFixed(2);
 
@@ -27,8 +25,8 @@ const IncomeExpense = ({ income, charge }: IncomeExpenseProps) => {
           borderRight: "1px solid grey",
         }}
       >
-        <h4 style={{ marginBottom: "5px" }}>INCOME </h4>
-        <h2 style={{ marginTop: "0px", color: "green" }}>
+        <h4 style={{marginBottom: "5px"}}>INCOME </h4>
+        <h2 style={{marginTop: "0px", color: "green"}}>
           $ {income.toFixed(2)}
         </h2>
       </div>
@@ -40,8 +38,8 @@ const IncomeExpense = ({ income, charge }: IncomeExpenseProps) => {
           alignItems: "center",
         }}
       >
-        <h4 style={{ marginBottom: "5px" }}>EXPENSE</h4>
-        <h2 style={{ marginTop: "0px", color: "red" }}>$ {chargeFormatted}</h2>
+        <h4 style={{marginBottom: "5px"}}>EXPENSE</h4>
+        <h2 style={{marginTop: "0px", color: "red"}}>$ {chargeFormatted}</h2>
       </div>
     </div>
   );
